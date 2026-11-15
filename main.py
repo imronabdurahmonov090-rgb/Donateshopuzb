@@ -1,8 +1,6 @@
 import sqlite3
-from typing import Optional
-from fastapi import FastAPI, Form, HTTPException, Request
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
 
 app = FastAPI(title="Donate Shop")
 
@@ -30,7 +28,6 @@ def init_db():
             status TEXT DEFAULT 'Pending'
         )
     """)
-  # Добавим демо-товары, если таблица пустая
   cursor.execute("SELECT COUNT(*) FROM products")
   if cursor.fetchone()[0] == 0:
     sample_products = [
@@ -74,7 +71,6 @@ def index(request: Request):
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
             .card { background: #1a1429; border: 1px solid #3d2c5e; border-radius: 12px; padding: 15px; text-align: center; }
             .btn { background: #7b2cbf; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%; font-weight: bold; }
-            .btn:active { background: #9d4edd; }
             .admin-link { display: block; text-align: center; margin-top: 20px; color: #9d4edd; text-decoration: none; }
         </style>
     </head>
